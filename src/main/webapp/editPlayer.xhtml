@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+
+</h:head>
+
+<h:body>
+
+    <h:form>
+        <p:panel id="panel" header="New Player">
+
+            <p:messages id="msgs" />
+
+            <h:panelGrid columns="3" cellpadding="5">
+                <p:outputLabel for="name" value="Name:" />
+                <p:inputText id="name" value="#{editPlayerView.name}" required="true" label="name">
+                    <f:validator validatorId="playerValidator" />
+                    <p:ajax update="name" event="keyup" />
+                </p:inputText>
+                <p:message for="name" id="msgname" display="icon" />
+
+                <p:outputLabel for="number" value="Number:" />
+                <p:inputText id="number" value="#{editPlayerView.number}" label="number" required="true">
+                    <p:ajax update="msgnumber" event="keyup" />
+                </p:inputText>
+                <p:message for="number" id="msgnumber" display="icon" />
+
+                <p:outputLabel for="team" value="Team:" />
+                <p:inputText id="team" value="#{editPlayerView.team}" required="true" label="team">
+                    <f:validateLength minimum="5" />
+                    <p:ajax update="team" event="keyup" />
+                </p:inputText>
+                <p:message for="team" id="msgteam" display="icon" />
+
+                <p:outputLabel for="country" value="Country:" />
+                <p:inputText id="country" value="#{editPlayerView.country}" required="true" label="country">
+                    <f:validateLength minimum="4" />
+                    <p:ajax update="country" event="keyup" />
+                </p:inputText>
+                <p:message for="country" id="msgcountry" display="icon" />
+
+            </h:panelGrid>
+
+            <p:commandButton value="Save" update="panel" action="#{editPlayerView.save}" icon="pi pi-check" />
+        </p:panel>
+    </h:form>
+</h:body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui" xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+</h:head>
+
+<h:body>
+    <style type="text/css">
+        .logo {
+            width: 5%
+        }
+
+        .detail {
+            width: 95%;
+            padding-left: 25px;
+        }
+
+        .detail td {
+            font-size: 24px;
+        }
+    </style>
+
+
+    <h:form id="form">
+        <p:repeat value="#{allPlayersView.players}" var="player">
+            <h:panelGrid columns="2" style="width:100%" columnClasses="logo,detail">
+                <p:graphicImage library="images" name="#{player.name.toLowerCase()}.jpg"/>
+
+                <p:outputPanel>
+                    <h:panelGrid columns="2" cellpadding="5">
+                        <h:outputText value="Name:"/>
+                        <h:outputText value="#{player.name}" style="font-weight: bold"/>
+                        <h:outputText value="Number:"/>
+                        <h:outputText value="#{player.number}" style="font-weight: bold"/>
+                        <h:outputText value="Team:"/>
+                        <h:outputText value="#{player.team}" style="font-weight: bold"/>
+                        <h:outputText value="Country:"/>
+                        <h:outputText value="#{player.country}" style="font-weight: bold"/>
+                    </h:panelGrid>
+                </p:outputPanel>
+                <p:commandButton value="Update player" action="#{allPlayersView.redirectToEditPlayer}"
+                                 style="margin-right:20px;">
+                    <f:actionListener binding="#{editPlayerView.populateView(player.id)}" />
+                </p:commandButton>
+                <p:commandButton value="Delete player" action="#{allPlayersView.deletePlayer(player.id)}"
+                                 style="margin-right:20px;"/>
+            </h:panelGrid>
+            <hr/>
+        </p:repeat>
+        <p:commandButton value="Add Player" action="#{allPlayersView.redirectToEditPlayer}" style="margin-right:20px;"/>
+    </h:form>
+
+</h:body>
+</html>
